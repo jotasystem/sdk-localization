@@ -4,53 +4,35 @@ namespace JotaSystem.Sdk.Localization
 {
     public static class LanguageProvider
     {
-        // Idioma padrão global do SDK
-        public static Language DefaultLanguage { get; private set; } = Language.PtBr;
+        public static Language DefaultLanguage { get; private set; } = Language.PtBr; // Idioma padrão global do SDK
 
-        public static void SetDefault(Language language)
+        public static Language Current()
         {
-            DefaultLanguage = language;
+            var culture = CultureInfo.CurrentUICulture;
+            return culture is null ? DefaultLanguage : FromCulture(culture);
         }
 
         // Usa o idioma informado ou o padrão
-        public static Language Use(Language? lang) => lang ?? DefaultLanguage;
+        public static Language Use(Language? lang = null)
+            => lang ?? Current();
 
-
-        /// <summary>
-        /// Converte CultureInfo ("pt-BR") para Language enum.
-        /// </summary>
+        // Converte CultureInfo ("pt-BR") para Language enum.
         public static Language FromCulture(CultureInfo culture)
-        {
-            return FromCode(culture.Name);
-        }
+            => FromCode(culture.Name);
 
-        /// <summary>
-        /// Converte código "pt-BR" ou "pt" para Language.
-        /// </summary>
+        // Converte código "pt-BR" ou "pt" para Language.
         public static Language FromCode(string code)
         {
-            switch (code.ToLower())
+            return code.ToLower() switch
             {
-                case "pt-br":
-                case "pt":
-                    return Language.PtBr;
-
-                case "en-us":
-                case "en":
-                    return Language.EnUs;
-
-                case "es-es":
-                case "es":
-                    return Language.EsEs;
-
-                default:
-                    return DefaultLanguage; // fallback seguro
-            }
+                "pt-br" or "pt" => Language.PtBr,
+                "en-us" or "en" => Language.EnUs,
+                "es-es" or "es" => Language.EsEs,
+                _ => DefaultLanguage,// fallback seguro
+            };
         }
 
-        /// <summary>
-        /// Retorna o código da cultura baseado no enum.
-        /// </summary>
+        // Retorna o código da cultura baseado no enum.
         public static string GetCode(Language? language = null)
         {
             return (language ?? DefaultLanguage) switch
@@ -61,12 +43,8 @@ namespace JotaSystem.Sdk.Localization
             };
         }
 
-        /// <summary>
-        /// Converte o enum Language para CultureInfo.
-        /// </summary>
+        // Converte o enum Language para CultureInfo.
         public static CultureInfo ToCulture(Language? language = null)
-        {
-            return new CultureInfo(GetCode(language));
-        }
+            => new(GetCode(language));
     }
 }

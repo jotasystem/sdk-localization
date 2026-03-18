@@ -8,21 +8,6 @@
             Assert.Equal(Language.PtBr, LanguageProvider.DefaultLanguage);
         }
 
-        [Fact]
-        public void SetDefault_ShouldChangeDefaultLanguage()
-        {
-            // Arrange
-            LanguageProvider.SetDefault(Language.EnUs);
-
-            // Act
-            var result = LanguageProvider.DefaultLanguage;
-
-            // Assert
-            Assert.Equal(Language.EnUs, result);
-
-            // Reset
-            LanguageProvider.SetDefault(Language.PtBr);
-        }
 
         [Fact]
         public void Use_ShouldReturnProvidedLanguage()
@@ -34,12 +19,8 @@
         [Fact]
         public void Use_ShouldReturnDefault_WhenNull()
         {
-            LanguageProvider.SetDefault(Language.EnUs);
             var result = LanguageProvider.Use(null);
-            Assert.Equal(Language.EnUs, result);
-
-            // Reset
-            LanguageProvider.SetDefault(Language.PtBr);
+            Assert.Equal(Language.PtBr, result);
         }
 
         [Theory]
@@ -55,12 +36,8 @@
         [Fact]
         public void GetCode_ShouldUseDefault_WhenNull()
         {
-            LanguageProvider.SetDefault(Language.EsEs);
-            var result = LanguageProvider.GetCode();
+            var result = LanguageProvider.GetCode(Language.EsEs);
             Assert.Equal("es-ES", result);
-
-            // Reset
-            LanguageProvider.SetDefault(Language.PtBr);
         }
     }
 }

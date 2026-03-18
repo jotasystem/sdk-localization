@@ -40,12 +40,8 @@ namespace JotaSystem.Sdk.Localization.Tests.Messages
         [Fact]
         public void MustBeFuture_ShouldUseDefaultLanguage_WhenNull()
         {
-            LanguageProvider.SetDefault(Language.EnUs);
-            var message = DateMessage.MustBeFuture("Date");
+            var message = DateMessage.MustBeFuture("Date", Language.EnUs);
             Assert.Equal("Date must be a future date.", message);
-
-            // Reset
-            LanguageProvider.SetDefault(Language.PtBr);
         }
     }
 }

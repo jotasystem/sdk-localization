@@ -17,17 +17,11 @@ namespace JotaSystem.Sdk.Localization.Tests.Messages
         [Fact]
         public void InvalidPattern_ShouldUseDefaultLanguage_WhenNull()
         {
-            // Arrange
-            LanguageProvider.SetDefault(Language.EnUs);
-
             // Act
             var message = RegexMessage.InvalidPattern("Field", Language.EnUs);
 
             // Assert
             Assert.Equal("Field does not match the expected pattern.", message);
-
-            // Reset para não interferir em outros testes
-            LanguageProvider.SetDefault(Language.PtBr);
         }
     }
 }

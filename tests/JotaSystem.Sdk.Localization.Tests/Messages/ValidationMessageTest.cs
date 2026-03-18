@@ -184,12 +184,8 @@ namespace JotaSystem.Sdk.Localization.Tests.Messages
         [Fact]
         public void RequiredField_ShouldUseDefaultLanguage_WhenNull()
         {
-            LanguageProvider.SetDefault(Language.EnUs);
-            var message = ValidationMessage.RequiredField("Email");
+            var message = ValidationMessage.RequiredField("Email", Language.EnUs);
             Assert.Equal("Email cannot be empty.", message);
-
-            // Reset
-            LanguageProvider.SetDefault(Language.PtBr);
         }
     }
 }

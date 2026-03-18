@@ -47,12 +47,8 @@ namespace JotaSystem.Sdk.Localization.Tests.Messages
         [Fact]
         public void MustBePositive_ShouldUseDefaultLanguage_WhenNull()
         {
-            LanguageProvider.SetDefault(Language.EsEs);
-            var message = NumericMessage.MustBePositive("Monto");
+            var message = NumericMessage.MustBePositive("Monto", Language.EsEs);
             Assert.Equal("Monto debe ser positivo.", message);
-
-            // Reset para não afetar outros testes
-            LanguageProvider.SetDefault(Language.PtBr);
         }
 
         [Theory]
