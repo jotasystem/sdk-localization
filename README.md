@@ -1,19 +1,21 @@
 # JotaSystem.Sdk.Localization
 
-Pacote de **internacionalização e localização (i18n/l10n)** da **Jota System**, responsável por centralizar mensagens traduzidas, resolução de idioma e serviços de tradução para aplicações .NET.
+Biblioteca simples de localização da **Jota System** para aplicações .NET.
 
----
-## 📦 Descrição
+## Descrição
 
-O **JotaSystem.Sdk.Localization** fornece a infraestrutura necessária para trabalhar com múltiplos idiomas de forma padronizada em APIs, serviços, aplicações web e demais soluções da plataforma Jota System.
+O `JotaSystem.Sdk.Localization` fornece uma camada leve para resolução de idioma e geração de mensagens padronizadas em múltiplas culturas.
 
-O pacote permite armazenar e acessar mensagens traduzidas para diferentes culturas (como `pt-BR`, `en-US`, `es-ES`), oferecendo um mecanismo centralizado e extensível para resolver textos conforme o idioma configurado.
+Hoje o pacote contém:
 
-Inclui:
-- **Serviço de localização** para obtenção de mensagens traduzidas.
-- **Provedores de tradução** (via arquivos JSON ou outras fontes).
-- **Detecção automática do idioma** via `CultureInfo`, cabeçalhos HTTP ou contexto da aplicação.
-- **Fallback de idioma**, garantindo retorno mesmo quando a tradução estiver ausente.
-- **Interfaces e abstrações** para permitir personalização e expansão.
+- Enum `Language` com suporte atual a `pt-BR`, `en-US` e `es-ES`.
+- `LanguageProvider` para converter cultura, código de idioma e idioma padrão do SDK.
+- Classes de mensagens estáticas para validação, datas, números, regex e mensagens genéricas.
 
----
+## Escopo atual
+
+Este pacote não usa arquivos JSON, banco de dados ou mecanismo externo de tradução. As mensagens são mantidas diretamente em código, com fallback para o idioma padrão.
+
+## Quando usar
+
+Use este SDK quando a aplicação precisar padronizar mensagens técnicas ou de validação em mais de um idioma, sem depender de uma infraestrutura completa de i18n.
